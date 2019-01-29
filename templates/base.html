@@ -1,0 +1,61 @@
+{% load static %}
+<html>
+
+    <head>
+        <title>Блог Макса</title>
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+   </head>
+    <body>
+        <div class="wrapper">
+            <div class="header">
+                <div class="tit">
+                    <h1><a href="/">Диета Дюкана</a></h1>
+                </div>
+                <div class="aut">
+                    {% if user.is_authenticated %}
+                    <div class="header_uname_pic">
+                        <div class="header_ava">
+                           {% if user.profile.avatar %}
+                                <img src="{{ user.profile.avatar.url }}">
+                           {% else %}
+                               {% load staticfiles %}
+                               <img src="{% static "default_avatar.jpg" %}">
+                           {% endif %}
+                        </div>
+                        <div class="header_u_name">
+                                <a href="{% url 'profile' %}" class="header_u_name">{{ user.username }}</a>
+                        </div>
+                    </div>
+                        <div class="header_u_name">
+                                <a href="{% url 'log_out' %}" class="top-menu">Выйти <span class="glyphicon glyphicon-log-out"></span></a>
+                        </div>
+                    {% else %}
+                        <a href="{% url 'register' %}" class="top-menu">Регистрация <span class="glyphicon glyphicon-user"></span></a>
+                    <br>
+                    <br>
+                        <a href="{% url 'login' %}" class="top-menu">Войти <span class="glyphicon glyphicon-log-in"></span></a>
+                    {% endif %}
+                </div>
+                <br>
+            </div>
+
+            <div class="main">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <h5>Сайт разработан Исаковым Максимом</h5>
+            <h5>В качестве контента представленна информация по популярной диете</h5>
+            <h5>E-mail: maksimes@mail.ru</h5>
+        </footer>
+    </body>
+</html>

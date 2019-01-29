@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3>{{ other_user.username }}</h3>
+        <div class="ava_prof">
+        {% if other_user.profile.avatar %}
+            <img src="{{ other_user.profile.avatar.url }}">
+        {% else %}
+            {% load staticfiles %}
+            <img src="{% static "default_avatar.jpg" %}">
+        {% endif %}
+        </div>
+        <br>
+        <p><strong>Город</strong> {{ other_user.profile.city }} </p>
+        <p><strong>Пол</strong>{% if other_user.profile.gender == "MAN" %} <span>Мужской</span> {% else %} <span>Женский</span> {% endif %}</p>
+        <p><strong>Дата рождения</strong> {{ other_user.profile.dateOfBirth }}</p>
+        <p><strong>Дата регистрации</strong> {{ other_user.date_joined.date }}</p>
+        <p><strong>Время последнего визита</strong> {{ other_user.last_login }}</p>
+        <br>
+    {% endif %}
+{% endblock %}

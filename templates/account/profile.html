@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h3>{{ user.username }}</h3>
+        <div class="ava_prof">
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar.url }}">
+        {% else %}
+            {% load staticfiles %}
+            <img src="{% static "default_avatar.jpg" %}">
+        {% endif %}
+        </div>
+        <br>
+        <p><strong>Город</strong> {{ user.profile.city }} </p>
+        <p><strong>Пол</strong>{% if user.profile.gender == "MAN" %} <span>Мужской</span> {% else %} <span>Женский</span> {% endif %}</p>
+        <p><strong>Дата рождения</strong> {{ user.profile.dateOfBirth }}</p>
+        <p><strong>Дата регистрации</strong> {{ user.date_joined.date }}</p>
+        <p><strong>Время последнего визита</strong> {{ user.last_login }}</p>
+        <p><strong>E-mail</strong> {{ user.email }}</p>
+        <br>
+        <a href="{%url 'edit_profile'%}"><button>Изменить персональную информацию</button></a>
+        <br>
+        <br>
+        <a href="{%url 'password_change'%}"><button>Изменить пароль</button></a>
+    {% endif %}
+{% endblock %}

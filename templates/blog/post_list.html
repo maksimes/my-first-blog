@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form action="">
+        {{ sform.search_field.label_tag }}
+        {{ sform.search_field }}
+        <input type="submit" value="Показать">
+        <br>
+        {{ sform.sort_field.label_tag }}
+        {{ sform.sort_field }}
+    </form>
+    <br><hr>
+
+    {% for post in post_list %}
+        <div class="post">
+            <div class ="ava_com_post">
+                {% if post.author.profile.avatar %}
+                    <img src="{{ post.author.profile.avatar.url }}">
+                {% else %}
+                    {% load staticfiles %}
+                    <img src="{% static "default_avatar.jpg" %}" align="left">
+                {% endif %}
+            </div>
+            <div>
+                <div class="post_date">
+                    <a href="{% url 'other_profile' u_name=post.author %}"><b>{{ post.author }}</b></a>
+                <p class="date"><i>{{ post.published_date }}</i></p>
+                </div>
+                <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+                <p>{{ post.text|linebreaksbr }}</p>
+            </div>
+        </div>
+    <hr>
+    {% endfor %}
+{% endblock %}

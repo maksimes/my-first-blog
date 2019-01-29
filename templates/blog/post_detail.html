@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="post">
+        <div class ="ava_com_post">
+                {% if post.author.profile.avatar %}
+                    <img src="{{ post.author.profile.avatar.url }}">
+                {% else %}
+                    {% load staticfiles %}
+                    <img src="{% static "default_avatar.jpg" %}" align="left">
+                {% endif %}
+        </div>
+        <div>
+            <div class="post_date">
+                <a href="{% url 'other_profile' u_name=post.author %}"><b>{{ post.author }}</b></a>
+            <p class="date"><i>{{ post.published_date }}</i></p>
+            </div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    </div>
+    <div class="comments">
+        {% for comment in comments %}
+            <hr>
+            <div class ="ava_com_post">
+                {% if comment.author.profile.avatar %}
+                <img src="{{ comment.author.profile.avatar.url }}">
+            {% else %}
+                {% load staticfiles %}
+                <img src="{% static "default_avatar.jpg" %}">
+            {% endif %}
+            </div>
+            <div class ="com">
+                <p class="date"><a href="{% url 'other_profile' u_name=comment.author %}"><b>{{ comment.author }}</b></a> ответил(а) <i>{{ comment.published_date }}</i></p>
+                <p>{{ comment.text|linebreaksbr }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+            <hr>
+            <form action="/post/{{ post.pk }}/add_comment/" method="POST" class="form">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p><input type="submit" value="Отправить"></p>
+            </form>
+        {% else %}
+            <br>
+            <h5>Что бы оставлять комментарии необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></h5>
+        {% endif %}
+{% endblock %}
+

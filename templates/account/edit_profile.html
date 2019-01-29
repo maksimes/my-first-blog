@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Edit_profile{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <h1>Изменение персональной информации</h1>
+    <p>Заполните поля и нажмите "Сохранить изменения":</p>
+    <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form.as_p }}
+        {{ user_form.as_p }}
+        <p><input type="submit" value="Сохранить изменения"></p>
+    </form>
+    {% endif %}
+{% endblock %}
