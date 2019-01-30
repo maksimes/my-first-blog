@@ -1,0 +1,188 @@
+/*{border:1px solid red; box-sizing:border-box} */
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.row {
+    margin: 30px;
+}
+
+h1 a{
+font-family: 'Lobster';
+}
+
+html, body {
+    height: 100%;
+    min-width: 1000px;
+}
+
+
+.header {
+    margin-top: 0;
+    margin-right: 30px;
+    height:150px;
+    border-radius: 0 0 10px 10px;
+    background-color: #ff9400;
+}
+
+
+.comments {
+    margin-left: 40px;
+}
+
+.foot_text {
+    margin-left: 40px;
+}
+
+h2, h3, h4 {
+    font-family:fantasy;
+}
+
+footer {
+    height: 150px;
+    margin-top: -150px;
+    margin-right: 30px;
+    border-radius: 10px 10px 0 0;
+    background-color: #ff9400;
+    padding: 30px;
+}
+
+
+.header h1, .header h1 a, .header h1 a:visited, .header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+.tit {
+    margin-left:50px;
+    height: 150px;
+    width: 325px;
+    float: left;
+    line-height	: 150px;
+    display: flex;
+    align-items: center;
+}
+
+.tit h1 {
+    margin: 0;
+}
+
+.aut {
+    height: 150px;
+    min-width: 350px;
+    width: auto;
+    float: right;
+    padding-top: 20px;
+    padding-right: 25;
+}
+
+.date {
+    color: #828282;
+}
+
+.save {
+    float: right;
+}
+
+.form textarea {
+    width: 100%;
+}
+
+.form input {
+    width: 100px;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    font-size: 26pt;
+    float: right;
+
+}
+
+.post {
+    margin-bottom: 70px;
+}
+
+.post h1 a, .post h1 a:visited {
+    color: #000000;
+}
+
+b {
+    color: blue;
+}
+
+button {
+    color: black;
+}
+
+.ava_com_post {
+    width: 58px;
+    height: 48px;
+    float: left;
+}
+
+.ava_com_post img{
+    max-width: auto;
+    height: 100%;
+    float: left;
+}
+
+.post_date {
+    height: 48px;
+    width: 300px;
+    padding-left: 65;
+}
+
+.com {
+    margin-left: 65px;
+}
+
+.ava_prof img{
+    width:150px;
+}
+
+.wrapper {
+    min-height: 100%;
+    padding-bottom: 165px;
+}
+
+.header_ava {
+    width: auto;
+    height: 40px;
+    float: right;
+}
+
+.header_ava img{
+    max-width: auto;
+    height: 100%;
+    float: left;
+}
+
+.header_u_name, .header_u_name a:hover {
+    height: 40px;
+    min-width: 20px;
+    color: #ffffff;
+    font-size: 26pt;
+    padding-right: 5px;
+    float: right;
+}
+
+.header_uname_pic {
+    width: auto;
+    height: 40px;
+}
+
+
+.logout .logout:hover, .logout:visited {
+    color: #ffffff;
+    font-size: 26pt;
+    float: right;
+}
+
+.post_text {
+    padding-left: 10px;
+}
