@@ -2,6 +2,7 @@
 {% block title %}Profile{% endblock %}
 {% block content %}
     {% if user.is_authenticated %}
+
         <h3>{{ other_user.username }}</h3>
         <div class="ava_prof">
         {% if other_user.profile.avatar %}
@@ -18,5 +19,7 @@
         <p><strong>Дата регистрации</strong> {{ other_user.date_joined.date }}</p>
         <p><strong>Время последнего визита</strong> {{ other_user.last_login }}</p>
         <br>
+    {% else %}
+<h5><i>Что бы просматривать профили необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></i></h5>
     {% endif %}
 {% endblock %}

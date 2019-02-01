@@ -45,8 +45,7 @@
                 <p><input type="submit" value="Отправить"></p>
             </form>
         {% else %}
-            <br>
-            <h5>Что бы оставлять комментарии необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></h5>
+            <h5><i>Что бы оставлять комментарии необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></i></h5>
         {% endif %}
 {% endblock %}
 
