@@ -186,3 +186,34 @@ button {
 .post_text {
     padding-left: 10px;
 }
+
+#div_comment {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+
+#comment_form {
+    width: 900px;
+    height: 330px;
+    margin-left: auto;
+    margin-right: auto;
+    background: white;
+    margin-top: 200px;
+    padding: 40px;
+}
+
+#resp_comment {
+    width: 150px;
+    height: 30px;
+}
+#exit_div {
+    width: 100px;
+    height: 30px;
+    margin-top: 30px;
+    float: right;
+}

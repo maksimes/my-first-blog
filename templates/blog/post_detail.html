@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <div class="post">
         <div class ="ava_com_post">
@@ -36,16 +35,22 @@
             </div>
         {% endfor %}
     </div>
-
     {% if user.is_authenticated %}
             <hr>
-            <form action="/post/{{ post.pk }}/add_comment/" method="POST" class="form">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <p><input type="submit" value="Отправить"></p>
-            </form>
+            <button id="resp_comment">Ответить</button>
+            <div id="div_comment">
+                <div id="exit_div">X Закрыть</div>
+                <div id="comment_form">
+                    <form action="/post/{{ post.pk }}/add_comment/" method="POST" class="form">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <p><input type="submit" value="Отправить"></p>
+                    </form>
+                </div>
+            </div>
         {% else %}
             <h5><i>Что бы оставлять комментарии необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></i></h5>
         {% endif %}
+
 {% endblock %}
 
