@@ -39,7 +39,6 @@ def post_detail(request,pk):
                                                      'comments':comments,
                                                      'form':form})
 
-
 def add_comment(request, post_pk):
     if request.method == "POST":
         form = CommentForm(request.POST)

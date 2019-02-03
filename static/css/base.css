@@ -198,13 +198,14 @@ button {
 }
 
 #comment_form {
-    width: 900px;
+    width: 800px;
     height: 330px;
-    margin-left: auto;
-    margin-right: auto;
-    background: white;
     margin-top: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    background: white;
     padding: 40px;
+    border: 2px solid darkgray;
 }
 
 #resp_comment {
@@ -212,8 +213,10 @@ button {
     height: 30px;
 }
 #exit_div {
-    width: 100px;
-    height: 30px;
-    margin-top: 30px;
     float: right;
+    color:lightgray;
+    background: #cc1111;
+    width: 25px;
+    margin-top: -40px;
+    margin-right: -40px;
 }
