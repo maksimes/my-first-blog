@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <form action="">
-        {{ sform.search_field.label_tag }}
-        {{ sform.search_field }}
-        <input type="submit" value="Показать">
-        <br>
-        {{ sform.sort_field.label_tag }}
-        {{ sform.sort_field }}
-    </form>
-    <br><hr>
-
+    <div id="search">
+        <form action="">
+            {{ sform.search_field.label_tag }}
+            {{ sform.search_field }}
+            <input type="submit" value="Показать">
+            <br>
+            {{ sform.sort_field.label_tag }}
+            {{ sform.sort_field }}
+        </form>
+    </div>
     {% for post in post_list %}
         <div class="post">
             <div class ="ava_com_post">
@@ -28,8 +28,13 @@
                 </div>
                 <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
                 <p>{{ post.text|linebreaksbr }}</p>
+                    {% if user.is_authenticated %}
+                        <button class="like" type="button" name="{{ post.pk }}">
+                            <span class="glyphicon glyphicon-heart"></span> <strong id="like_count_{{ post.pk }}">{{ post.likes.count }}</strong>
+                        </button>
+                    {% endif %}
             </div>
+            <hr>
         </div>
-    <hr>
     {% endfor %}
 {% endblock %}

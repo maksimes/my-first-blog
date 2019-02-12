@@ -2,10 +2,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Comments
 from django.utils import timezone
 from .forms import CommentForm, SearchForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.db.models import Q
 from itertools import chain
 from operator import attrgetter
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
 
 
 def post_list(request):
@@ -39,6 +45,12 @@ def post_detail(request,pk):
                                                      'comments':comments,
                                                      'form':form})
 
+
+def comments_ajax(request, pk):
+    comments = Comments.objects.filter(comments_post=pk)
+    return render(request, 'blog/comments_ajax.html', {'comments':comments})
+
+
 def add_comment(request, post_pk):
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -49,3 +61,17 @@ def add_comment(request, post_pk):
             comment.comments_post = Post.objects.get(pk=post_pk)
             comment.save()
     return HttpResponseRedirect('/post/%s/' %post_pk)
+
+
+@login_required
+@require_POST
+def add_like(request):
+    user = request.user
+    post_id = request.POST.get('postid', None)
+    post = get_object_or_404(Post, id=post_id)
+    if post.likes.filter(id=user.id).exists():
+        post.likes.remove(user)
+    else:
+        post.likes.add(user)
+    data = {'likes_count':post.total_likes, 'post_id':post.id}
+    return HttpResponse(json.dumps(data), content_type="application/json")

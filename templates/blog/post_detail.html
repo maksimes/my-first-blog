@@ -16,27 +16,16 @@
             </div>
             <h3>{{ post.title }}</h3>
             <p>{{ post.text|linebreaksbr }}</p>
+            {% if user.is_authenticated %}
+                <button class="like" type="button" name="{{ post.pk }}">
+                    <span class="glyphicon glyphicon-heart"></span> <strong id="like_count_{{ post.pk }}">{{ post.likes.count }}</strong>
+                </button>
+            {% endif %}
         </div>
     </div>
     <div class="comments">
-        {% for comment in comments %}
-            <hr>
-            <div class ="ava_com_post">
-                {% if comment.author.profile.avatar %}
-                <img src="{{ comment.author.profile.avatar.url }}">
-            {% else %}
-                {% load staticfiles %}
-                <img src="{% static "default_avatar.jpg" %}">
-            {% endif %}
-            </div>
-            <div class ="com">
-                <p class="date"><a href="{% url 'other_profile' u_name=comment.author %}"><b>{{ comment.author }}</b></a> ответил(а) <i>{{ comment.published_date }}</i></p>
-                <p>{{ comment.text|linebreaksbr }}</p>
-            </div>
-        {% endfor %}
     </div>
     {% if user.is_authenticated %}
-            <hr>
             <button id="resp_comment">Ответить</button>
             <div id="div_comment">
                 <div id="comment_form">
@@ -44,7 +33,7 @@
                     <form action="/post/{{ post.pk }}/add_comment/" method="POST" class="form">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <p><input type="submit" value="Отправить"></p>
+                        <p><input type="submit" value="Отправить" id="send_com"></p>
                     </form>
                 </div>
             </div>
@@ -52,4 +41,3 @@
             <h5><i>Что бы оставлять комментарии необходимо <a href="{% url 'login' %}" >Войти</a> или <a href="{% url 'register' %}">Зарегистрироваться</a></i></h5>
         {% endif %}
 {% endblock %}
-

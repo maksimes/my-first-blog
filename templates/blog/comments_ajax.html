@@ -1,0 +1,16 @@
+{% for comment in comments %}
+    <hr>
+    <div class ="ava_com_post">
+        {% if comment.author.profile.avatar %}
+        <img src="{{ comment.author.profile.avatar.url }}">
+    {% else %}
+        {% load staticfiles %}
+        <img src="{% static "default_avatar.jpg" %}">
+    {% endif %}
+    </div>
+    <div class ="com">
+        <p class="date"><a href="{% url 'other_profile' u_name=comment.author %}"><b>{{ comment.author }}</b></a> ответил(а) <i>{{ comment.published_date }}</i></p>
+        <p>{{ comment.text|linebreaksbr }}</p>
+    </div>
+{% endfor %}
+<hr>
