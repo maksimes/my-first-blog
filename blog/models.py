@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     title = models.CharField("Заголовок",  max_length=200)
     text = models.TextField("Текст поcта")
-    created_date = models.DateTimeField(
+    created_date = models.DateTimeField("Дата создания",
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)

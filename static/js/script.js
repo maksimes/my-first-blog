@@ -24,3 +24,25 @@ $('.like').click(function(){
         }
     });
 });
+
+
+$('#add_comment').submit(function(){
+    $.ajax({
+        headers: {"X-CSRFToken": $.cookie("csrftoken")},
+        data: $(this).serialize(),
+        type: "POST",
+        url: "add_comment/",
+        success: function(response) {
+            $("#div_comment").css({"display":"none"});
+            $(".comments").load("comments_ajax/");
+            $("#add_comment").each(function(){
+            this.reset();
+            });
+
+        },
+        error: function(rs, e) {
+           alert(rs.responseText);
+        }
+    });
+    return false;
+});

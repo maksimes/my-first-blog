@@ -9,7 +9,6 @@ class CommentForm(forms.ModelForm):
 
 
 class SearchForm(forms.Form):
-
     search_field = forms.CharField(label='Найти',
                                    widget=forms.TextInput(attrs={
                                        'placeholder':'Поиск по постам, их заг'

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Post, Comments
 from django.utils import timezone
 from .forms import CommentForm, SearchForm
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.db.models import Q
 from itertools import chain
 from operator import attrgetter
@@ -60,7 +60,8 @@ def add_comment(request, post_pk):
             comment.published_date = timezone.now()
             comment.comments_post = Post.objects.get(pk=post_pk)
             comment.save()
-    return HttpResponseRedirect('/post/%s/' %post_pk)
+            message="ok"
+        return HttpResponse(message)
 
 
 @login_required

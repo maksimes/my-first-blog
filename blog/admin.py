@@ -9,8 +9,8 @@ class PostInline(admin.StackedInline):
     extra = 0
 
 class AdminPost(admin.ModelAdmin):
-    list_display = ["title", "created_date"]
-    ordering = ["title"]
+    list_display = ["title", "created_date", "author", "total_likes",]
+    ordering = ["created_date"]
     inlines = [PostInline]
 
 admin.site.register(Post, AdminPost)

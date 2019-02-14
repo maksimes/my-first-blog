@@ -30,10 +30,10 @@
             <div id="div_comment">
                 <div id="comment_form">
                     <button id="exit_div">X</button>
-                    <form action="/post/{{ post.pk }}/add_comment/" method="POST" class="form">
+                    <form id="add_comment" action="" method="POST" class="form" name="{{ post.pk }}">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <p><input type="submit" value="Отправить" id="send_com"></p>
+                        <p><input type="submit" value="Отправить" id="send_com" name="{{ post.pk }}" ></p>
                     </form>
                 </div>
             </div>
