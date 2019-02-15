@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '9jtmm$9a_ri*p2l187xptmysf&&iv&
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
+DEBUG = bool( os.getenv('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = ['maks-blog.herokuapp.com', '127.0.0.1', 'maksimes.pythonanywhere.com']
 
@@ -152,10 +152,11 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
-django_heroku.settings(locals())
-
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+django_heroku.settings(locals())
