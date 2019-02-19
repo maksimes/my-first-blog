@@ -50,8 +50,11 @@ def feedback(request):
             if request.user.is_authenticated():
                 feedback.author = request.user
             feedback.save()
-            send_mail('Feedback maksblog', '%s | %s | %s | %s ' %(feedback.author, feedback.name, feedback.email, feedback.text),
-                      'maksblog.server@gmail.com', ['maksimes@mail.ru'], fail_silently=False)
+            send_mail('Feedback maksblog', '%s | %s | %s | %s '
+                      %(feedback.author, feedback.name, feedback.email,
+                        feedback.text),
+                      'maksblog.server@gmail.com', ['maksimes@mail.ru'],
+                      fail_silently=False)
             message="Спасибо! Я с Вами свяжусь."
         return HttpResponse(message)
 
@@ -70,17 +73,18 @@ def comments_ajax(request, pk):
     return render(request, 'blog/comments_ajax.html', {'comments':comments})
 
 
+@login_required
+@require_POST
 def add_comment(request, post_pk):
-    if request.method == "POST":
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.author = request.user
-            comment.published_date = timezone.now()
-            comment.comments_post = Post.objects.get(pk=post_pk)
-            comment.save()
-            message="ok"
-        return HttpResponse(message)
+    form = CommentForm(request.POST)
+    if form.is_valid():
+        comment = form.save(commit=False)
+        comment.author = request.user
+        comment.published_date = timezone.now()
+        comment.comments_post = Post.objects.get(pk=post_pk)
+        comment.save()
+        message="ok"
+    return HttpResponse(message)
 
 
 @login_required

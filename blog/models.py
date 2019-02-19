@@ -4,6 +4,10 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
+    class Meta:
+        verbose_name = "Пост"
+        verbose_name_plural = "Посты"
+
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
     title = models.CharField("Заголовок",  max_length=200)
     text = models.TextField("Текст поcта")
@@ -11,7 +15,8 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField("Дата публикации",
             blank=True, null=True)
-    likes = models.ManyToManyField(User, related_name='likes', default=0, blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='likes', default=0,
+                                   blank=True, null=True)
 
     @property
     def total_likes(self):
@@ -31,7 +36,7 @@ class Comments(models.Model):
 
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField("Ответ")
-    comments_post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    comments_post = models.ForeignKey("Пост",Post, on_delete=models.CASCADE)
     published_date = models.DateTimeField("Дата публикации",
         default=timezone.now)
 
@@ -40,7 +45,12 @@ class Comments(models.Model):
         self.save()
 
 class Feedback(models.Model):
-    author = models.ForeignKey("auth.User", on_delete=models.CASCADE, blank=True, null=True)
+    class Meta:
+        verbose_name = "Обратная связь"
+        verbose_name_plural = "Обратная связь"
+
+    author = models.ForeignKey("auth.User", on_delete=models.CASCADE,
+                               blank=True, null=True)
     name = models.CharField("Имя", max_length=30, blank=True, null=True)
     email = models.EmailField("E-mail", max_length=30)
     text = models.TextField("Текст сообщения")
