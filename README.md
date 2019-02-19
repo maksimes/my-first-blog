@@ -13,8 +13,8 @@ Users can edit their profile, add a photo,<br/>
 view profiles of other users.
 
 The main logic is written in Python-3.6.7, Django 11.20.0<br/>
-Postgres is used to implement a case-insensitive search.<br/>
-instead of standard SQLite
+Postgres is used to implement a case-insensitive search,<br/>
+instead of standard SQLite.
 
 The site is deployed on Heroku <https://maks-blog.herokuapp.com/><br/>
 Since Heroku does not store static files and files for a long time<br/>
