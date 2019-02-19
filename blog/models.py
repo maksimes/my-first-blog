@@ -12,7 +12,7 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
-    likes = models.ManyToManyField(User, related_name='likes', default=0, blank=True, null=True)
+    likes = models.ManyToManyField(User, related_name='likes', default=0)
 
     @property
     def total_likes(self):
