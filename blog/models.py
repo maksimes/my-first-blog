@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django import forms
 
 
 class Post(models.Model):
@@ -10,7 +9,7 @@ class Post(models.Model):
     text = models.TextField("Текст поcта")
     created_date = models.DateTimeField("Дата создания",
             default=timezone.now)
-    published_date = models.DateTimeField(
+    published_date = models.DateTimeField("Дата публикации",
             blank=True, null=True)
     likes = models.ManyToManyField(User, related_name='likes', default=0, blank=True, null=True)
 
@@ -27,13 +26,13 @@ class Post(models.Model):
 
 class Comments(models.Model):
     class Meta:
-        verbose_name = "Comment"
-        verbose_name_plural = "Comments"
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
 
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField("Ответ")
     comments_post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    published_date = models.DateTimeField(
+    published_date = models.DateTimeField("Дата публикации",
         default=timezone.now)
 
     def publish(self):
