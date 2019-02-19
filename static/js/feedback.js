@@ -1,0 +1,1 @@
+$(".feedback").load("feedback/feedback_form_ajax/");

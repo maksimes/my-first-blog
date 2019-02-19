@@ -37,4 +37,14 @@
             <hr>
         </div>
     {% endfor %}
+    <div id="feedback_block">
+        <button id="exit_feedback">X</button>
+        <p id="fb_title"><img id="fb_ava" src="{% static "maks_ava.jpg" %}"> Максим:</p>
+        ... <i id="fb_mytext">напишите мне!</i>
+        <form id="feedback_form" method="POST" class="form">
+            {% csrf_token %}
+            {{ feedback_form.as_p }}
+        <p><input type="submit" value="Отправить" id="send_feedback "></p>
+        </form>
+    </div>
 {% endblock %}

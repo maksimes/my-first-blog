@@ -1,6 +1,5 @@
 from django import forms
-from .models import Comments
-
+from .models import Comments, Feedback
 
 class CommentForm(forms.ModelForm):
     class Meta:
@@ -15,3 +14,9 @@ class SearchForm(forms.Form):
                                                      'оловкам и комментариям',
                                        'size':'60'}))
     sort_field = forms.BooleanField(label="Сначала старые", required=False)
+
+
+class FeedbackForm(forms.ModelForm):
+    class Meta:
+        model = Feedback
+        fields = ('name', 'email', 'text')

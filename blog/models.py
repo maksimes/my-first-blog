@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django import forms
 
 
 class Post(models.Model):
@@ -38,3 +39,11 @@ class Comments(models.Model):
     def publish(self):
         self.send_date = timezone.now()
         self.save()
+
+class Feedback(models.Model):
+    author = models.ForeignKey("auth.User", on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField("Имя", max_length=30, blank=True, null=True)
+    email = models.EmailField("E-mail", max_length=30)
+    text = models.TextField("Текст сообщения")
+    send_date = models.DateTimeField("Дата отправки",
+                                     default=timezone.now)

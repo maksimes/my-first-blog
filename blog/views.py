@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Comments
 from django.utils import timezone
-from .forms import CommentForm, SearchForm
+from .forms import CommentForm, SearchForm, FeedbackForm
 from django.http import HttpResponse
 from django.db.models import Q
 from itertools import chain
@@ -12,9 +12,11 @@ try:
     from django.utils import simplejson as json
 except ImportError:
     import json
+from django.core.mail import send_mail
 
 
 def post_list(request):
+    feedback_form = FeedbackForm()
     posts = Post.objects.filter(published_date__lte=timezone.now())
     post_list = posts.order_by('-published_date')
     comments = Comments.objects.all()
@@ -30,11 +32,28 @@ def post_list(request):
                                reverse = not(cd['sort_field']),
                                key = attrgetter('published_date'))
             return render(request, 'blog/post_list.html',
-                          {'post_list': post_list, 'sform': sform})
+                          {'post_list': post_list, 'sform': sform,
+                           'feedback_form':feedback_form})
     else:
         sform = SearchForm()
-    return render(request, 'blog/post_list.html', {'post_list': post_list,
-                                                   'sform': sform})
+    return render(request, 'blog/post_list.html',
+                  {'post_list': post_list, 'sform': sform,
+                   'feedback_form':feedback_form})
+
+
+@require_POST
+def feedback(request):
+    if request.method == "POST":
+        form = FeedbackForm(request.POST)
+        if form.is_valid():
+            feedback = form.save(commit=False)
+            if request.user.is_authenticated():
+                feedback.author = request.user
+            feedback.save()
+            send_mail('Feedback maksblog', '%s | %s | %s | %s ' %(feedback.author, feedback.name, feedback.email, feedback.text),
+                      'maksblog.server@gmail.com', ['maksimes@mail.ru'], fail_silently=False)
+            message="Спасибо! Я с Вами свяжусь."
+        return HttpResponse(message)
 
 
 def post_detail(request,pk):

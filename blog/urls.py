@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>[0-9]+)/comments_ajax/$', views.comments_ajax,
         name='comments_ajax'),
     url(r'add_like/$', views.add_like, name='add_like'),
+    url(r'^feedback/$', views.feedback, name='feedback'),
 ]
