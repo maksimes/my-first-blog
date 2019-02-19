@@ -36,7 +36,7 @@ class Comments(models.Model):
 
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField("Ответ")
-    comments_post = models.ForeignKey("Пост",Post, on_delete=models.CASCADE)
+    comments_post = models.ForeignKey(Post, on_delete=models.CASCADE)
     published_date = models.DateTimeField("Дата публикации",
         default=timezone.now)
 
