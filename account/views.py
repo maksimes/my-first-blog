@@ -29,6 +29,7 @@ def register(request):
         profile_form = ProfileForm()
     return render(request, 'account/register.html',
                   {'user_form': user_form, 'profile_form': profile_form})
+#процесс регистрации позьзователей
 
 
 @login_required
@@ -46,6 +47,7 @@ def edit_profile(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
         return render(request,'account/edit_profile.html',
                       {'user_form': user_form, 'profile_form': profile_form})
+#редактирование информации в своем профиле и фотографии
 
 
 def other_profile(request,u_name):
@@ -55,6 +57,7 @@ def other_profile(request,u_name):
         other_user=get_object_or_404(User, username=u_name)
         return render(request, 'account/other_profile.html',
                       {'other_user': other_user})
+#просмотр чужого профиля
 
 
 def user_login(request):
@@ -82,12 +85,15 @@ def user_login(request):
     else:
         form = LoginForm()
     return render(request, 'account/login.html', {'form': form})
+#вход в учетную запись пользователя
 
 
 def log_out(request):
     logout(request)
     return HttpResponseRedirect('/')
+#выход из учетной записи
 
 
 def profile(request):
     return render(request, 'account/profile.html',)
+#просмотр своего профиля

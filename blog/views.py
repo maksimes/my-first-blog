@@ -39,6 +39,7 @@ def post_list(request):
     return render(request, 'blog/post_list.html',
                   {'post_list': post_list, 'sform': sform,
                    'feedback_form':feedback_form})
+#создание списка постов, поиск по постам
 
 
 @require_POST
@@ -57,6 +58,7 @@ def feedback(request):
                       fail_silently=False)
             message="Спасибо! Я с Вами свяжусь."
         return HttpResponse(message)
+#форма обратной связи. Отправляет текст ОС на email
 
 
 def post_detail(request,pk):
@@ -66,11 +68,13 @@ def post_detail(request,pk):
     return render(request, 'blog/post_detail.html', {'post':post,
                                                      'comments':comments,
                                                      'form':form})
+#отображает детальную информацию по постам, комментарии, форму их добавления
 
 
 def comments_ajax(request, pk):
     comments = Comments.objects.filter(comments_post=pk)
     return render(request, 'blog/comments_ajax.html', {'comments':comments})
+#подгружает комментарии в блок
 
 
 @login_required
@@ -85,6 +89,7 @@ def add_comment(request, post_pk):
         comment.save()
         message="ok"
     return HttpResponse(message)
+#создание комментариев
 
 
 @login_required
@@ -99,3 +104,4 @@ def add_like(request):
         post.likes.add(user)
     data = {'likes_count':post.total_likes, 'post_id':post.id}
     return HttpResponse(json.dumps(data), content_type="application/json")
+#добавление и удаление лайков
