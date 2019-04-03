@@ -12,7 +12,7 @@ There is a feedback form that sends feedback to the email administrator.<br/>
 Users can edit their profile, add a photo,<br/>
 view profiles of other users.
 
-The main logic is written in Python-3.6.7, Django 11.20.0<br/>
+The main logic is written in Python-3.6.7, Django 1.11.20<br/>
 Postgres is used to implement a case-insensitive search,<br/>
 instead of standard SQLite.
 
